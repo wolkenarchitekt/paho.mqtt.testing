@@ -233,6 +233,9 @@ def create(port, host="", TLS=False, serve_forever=False,
     cert_reqs=ssl.CERT_REQUIRED,
     ca_certs=None, certfile=None, keyfile=None, allow_non_sni_connections=True):
   global server
+  if port == 1883:
+    host = "localhost"
+    port = 12345
   logger.info("Starting TCP listener on address '%s' port %d %s", host, port, "with TLS support" if TLS else "")
 
   def snicallback(socket, text, context):
